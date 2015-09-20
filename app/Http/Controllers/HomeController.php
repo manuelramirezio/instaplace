@@ -34,7 +34,7 @@ class HomeController extends Controller {
 
 	}
 
-	private function _authorize() {
+	private function _Authorize() {
 		//Return false if user logged in
 		if (Session::has('access_token')):
 			$this->instagram->setAccessToken(Session::put('userInfo'));
@@ -59,8 +59,6 @@ class HomeController extends Controller {
 			//redirect to initial page
 			header('Location: ' . $this->redirectUri);
 		else:
-			//Set scope of access and set URL for authorization
-			$url = $this->instagram->getAuthorizeUrl($this->redirectUri, array('basic', 'likes', 'comments', 'relationships'));
 
 			//Display authorization page
 			return view('home');
@@ -74,7 +72,7 @@ class HomeController extends Controller {
 	 *
 	 * @param string $username
 	 */
-	private function _getUserId($username) {
+	private function _GetUserId($username) {
 		//Get user's id
 		$userId = $this->instagram->get('/users/search/', array('q' => $username));
 
@@ -114,7 +112,7 @@ class HomeController extends Controller {
 	public function user($name = FALSE, $id = FALSE) {
 		//if username doesn't exist, show profile of authorized user
 		if ($name):
-			$userId = $this->_getUserId($name);
+			$userId = $this->_GetUserId($name);
 			$media = $this->instagram->get("/media/shortcode/shortcode");
 
 			$user = $this->instagram->get("/users/{$userId}/");
@@ -137,7 +135,7 @@ class HomeController extends Controller {
 	/**
 	 * Display current relationship between users
 	 */
-	public function _relationship($userId = FALSE) {
+	public function _Relationship($userId = FALSE) {
 		if (!$userId) {
 			return FALSE;
 		}

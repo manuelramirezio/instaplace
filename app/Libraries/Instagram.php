@@ -240,7 +240,7 @@ class InstagramJson implements ArrayAccess, Countable, IteratorAggregate {
 	}
 
 	public function __isset($name) {
-		$value = self::__get($name);
+
 		return !empty($name);
 	}
 }
@@ -274,16 +274,13 @@ class InstagramForbiddenException extends InstagramException {}
 class InstagramNotFoundException extends InstagramException {}
 
 class EpiCurl {
-	const timeout = 3;
+	const Timeout = 3;
 	static $inst = null;
 	static $singleton = 0;
 	private $mc;
-	private $msgs;
 	private $running;
 	private $execStatus;
-	private $selectStatus;
 	private $sleepIncrement = 1.1;
-	private $requests = array();
 	private $responses = array();
 	private $properties = array();
 	function __construct() {
@@ -326,7 +323,7 @@ class EpiCurl {
 		}
 	}
 	public function getResult($key = null) {
-		if ($key != null) {
+		if ($key !== null) {
 			if (isset($this->responses[$key]['data'])) {
 				return $this->responses[$key];
 			}
@@ -347,7 +344,6 @@ class EpiCurl {
 				if (isset($this->responses[$key]['data'])) {
 					return $this->responses[$key];
 				}
-				$runningCurrent = $this->running;
 			}
 			return null;
 		}
@@ -382,7 +378,7 @@ class EpiCurl {
 		}
 	}
 	static function getInstance() {
-		if (self::$inst == null) {
+		if (self::$inst === null) {
 			self::$singleton = 1;
 			self::$inst = new EpiCurl();
 		}
