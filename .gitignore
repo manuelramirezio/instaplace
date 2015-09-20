@@ -1,5 +1,6 @@
 /vendor
 /node_modules
+/config/instagram.php
 Homestead.yaml
 Homestead.json
 .env
