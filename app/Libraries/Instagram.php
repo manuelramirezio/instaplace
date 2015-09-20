@@ -1,6 +1,7 @@
 <?php
 namespace App\Libraries;
 use ArrayAccess;
+use ArrayIterator;
 use Countable;
 use Exception;
 use IteratorAggregate;
